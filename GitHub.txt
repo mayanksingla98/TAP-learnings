@@ -1,0 +1,61 @@
+## Types of Repositories:
+	1. Central Repository
+	   This is a system in which every contributer works on single main Repository
+
+	2. Distributed Repository
+	   This is a system in which every contributer has its own clone of the main Repository and works in that only.
+
+* Git is a Distributed Version Control System
+* GitHub is acquired by Microsoft in 2018
+
+
+
+LEVEL 1 - GIT BASICS
+
+## Setting Up Git from Command line
+	1. git config --global user.name mayanksingla98				//Who gets credit for changes
+	2. git config --global user.email mayanksingla13@gmail.com	//What email you use
+	3. git config --global color.ui true						//Pretty command line colors
+
+## Starting a Repository
+	1. mkdir store
+	2. cd store
+	3. git init		//Intialize empty Git repo in Current Path and all the metadata get stored here
+
+## Git Work Flow
+	1. User creates README.txt file		//generally in .md format
+	2. Add file to staging area			//Getting ready to take a picture
+	   Command: git add <file_name or '*' or '--all'>
+	3. Commit changes					//A spanshot of those on the stage
+	   Command: git commit -m "commit message"
+
+* git status	-> To check what's changed since last commit
+* git log	-> To check Git Timeline History
+
+## Different Ways to Add/Stage files
+	1. git add <list of files>	// Add the list of files
+	2. git add --all		// Add all files
+	3. git add *.txt		// Add all txt files in current directory
+	4. git add docs/*.txt		// Add all txt files in docs directory
+	5. git add docs/		// Add all files in docs directory
+	6. git add "*.txt"		// Add all txt files in the whole project
+
+
+
+LEVEL 2 - STAGING AND REMOTES
+
+* git diff				-> Show unstaged differences since last commit
+* git reset HEAD <file>			-> unstaging files
+* git checkout -- <file>		-> to discard changes in working directory
+* git reset --soft HEAD^		-> undo last commit, put changes into staging
+* git commit --amend -m "New Message"	-> Change the last commit
+* git reset --hard HEAD^		-> Undo last commit and all changes
+* git reset --hard HEAD^^		-> Undo last 2 commits and all changes
+* git remote add <name> <repo_path>	-> adding a remote
+* git remote -v				-> show remote repositories
+* git remote rm <name>			-> to remove remotes
+* git push -u <name> <branch>		-> pushing to remote
+* git pull				-> pulling from remote
+
+ 	
+	
