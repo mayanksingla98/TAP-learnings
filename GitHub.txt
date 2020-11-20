@@ -57,5 +57,23 @@ LEVEL 2 - STAGING AND REMOTES
 * git push -u <name> <branch>		-> pushing to remote
 * git pull				-> pulling from remote
 
- 	
-	
+
+LEVEL 3 - Cloning and Branching
+
+* git branch				-> to view all available branches
+* git branch <name>			-> creates new branch with given name
+* git checkout <name>			-> to change the branch
+* git merge <name>			-> to merge child branch with main branch	
+
+LEVEL 4 - Generate and link SSH key
+
+	1. Open Git Bash on your workspace.
+	2. Enter ssh-keygen
+	3. Press ENTER for default path
+	4. Press Enter 3/4 times
+	5. Copy path of file where Key is Generated
+	6. Enter cat <path>
+	7. Copy key without spaces
+	8. Open GitHub setting > SSH keys
+	9. Add title and paste Key
+	10.Click Add SSH key
