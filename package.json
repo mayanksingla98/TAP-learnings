@@ -1,0 +1,25 @@
+{
+  "name": "tap-learnings",
+  "version": "1.0.0",
+  "description": "form VS code...",
+  "main": "tut63.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayanksingla98/TAP-learnings.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mayanksingla98/TAP-learnings/issues"
+  },
+  "homepage": "https://github.com/mayanksingla98/TAP-learnings#readme"
+}
