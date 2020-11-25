@@ -5,6 +5,7 @@
   "main": "tut63.js",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.10.15",
     "pug": "^3.0.0"
   },
   "devDependencies": {

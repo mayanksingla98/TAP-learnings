@@ -1,0 +1,50 @@
+//Commands to insert,search,update and delete data in MongoDB
+//Tut 81,82,83,84
+
+1. use <database_name>
+    eg -> use mayanKart                                 //Switch or Create new Database
+
+2. db.<collection_name>.insertOne({<object_values>})
+    eg -> db.items.insertOne({name: "Samsung s20", price: 60000, discount: 5, rating: 4.3, quantity_left: 908, sold: 156 })                                   //Insert one document in specific collection 
+
+3. db.<collection_name>.insertMany([{<1object_values>},{<2object_values>}])
+    eg -> db.items.insertMany([{name: "iphone 11", price: 80000, discount: 10, rating: 4.8, quantity_left: 545, sold: 155 }, {name: "RealMe 7", price: 16000, discount: 10, quantity_left: 998, sold: 2 }, {name: "Redmi 8 pro", price: 17000, discount: 15, rating: 4.6, quantity_left: 202, sold: 798 }])
+                                                        //Insert many documents in specific collection 
+
+4. show dbs                                             //Show all available Databases
+
+5. show collections                                     //Show all available collections in current Databse
+
+6. db.<collection_name>.find()
+    eg -> db.items.find()                               //Show all documents in specific collection
+
+7. db.<collection_name>.find({<condition>})
+    eg -> db.items.find({ rating: 4.3 })                //Show all documents with rating 4.3
+
+    eg -> db.items.find({ rating: {$gte: 4.6} })        //Documents with rating greater than equal to 4.3
+
+    eg -> db.items.find({ rating: {$gt: 4.6} })         //Documents with rating greater than 4.3
+
+    eg -> db.items.find({ rating: {$gt: 4.5}, price: {$lt: 20000} })
+                                                        //Documents with rating greater than 4.5 AND price less than 20000
+
+    eg -> db.items.find({ $or: [ {rating: {$gt: 4.6}}, {price: {$lt: 20000}} ] })
+                                                        //Documents with rating greater than 4.6 OR price less than 20000
+                        
+8. db.<collection_name>.find({<condition>}, {<projection>})
+    eg -> db.items.find( {rating: {$gte: 4.6}} , {rating: 1, name: 1} )
+                                                        //Will only show rating, name of matching Documents
+
+9. db.<collection_name>.deleteOne({<condition>})
+    eg -> db.items.deleteOne({name: "RealMe 7"})        //Delete the first entry of matching document
+
+10. db.<collection_name>.deleteMany({<condition>})
+    eg -> db.items.deleteMany({price: {lt: 20000}})     //Delete all the entries of matching document
+
+11. db.<collection_name>.updateOne( {find_condition}, {$set: {<set_condition>}} )
+    eg -> db.items.updateOne( {name: "RealMe 7"}, {$set: {price: 13000}} )
+                                                        //Update the first entry of matching document and will set Price as 13000
+
+12. db.<collection_name>.updateMany( {find_condition}, {$set: {<set_condition>}} )
+    eg -> db.items.updateMany( {rating: {$gt: 4.5}}, {$set: {rating: 4.9, discount: 30}} )
+                                                        //Update all the entries of matching document and will set rating as 4.5, discount as 30
