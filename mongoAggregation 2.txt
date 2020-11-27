@@ -1,0 +1,138 @@
+1) Aggregation function:
+
+syntax->	db.<collection>.aggregate([
+			<stage 1>,
+			<stage 2>,
+			...
+			<stage N>
+			])
+
+2) Aggregation Stages:
+$match , $group , $project , $sort , $count , $limit , $unwind , $skip , $out
+
+syntax->	{$<stage_operator> : {}}
+
+eg ->	{$match : {age: {$gt: 20} } }
+		{$group : {_id: "$age"} } }
+		{$sort : {count: -1} } }
+		
+3) Aggregation Expression:
+
+syntax->	"$<field_name>"
+
+eg ->	{$group : {_id: "$age"} } }
+		{$group : {_id: "$company.location.country"} } }
+		{$group : {_id: "$name" , total: {$sum: "$price"} } } }
+		
+4) $match Stage:															// Generally Used in starting
+
+syntax->	{$match: {<query>} }
+
+eg ->	{$match : { city: "New York"} }
+		{$match : { age: { $gt: 25 } } }
+		{$match : { $and: [ {gender: "female"} , {age: { $gt: 25 }} ] } }
+		
+5) $group Stage:															// Generally Used after $match
+
+syntax->	{$group: {_id: <expression> , <field 1> : {<accumulator 1> : <expression 1>} , ... } }
+
+eg -> 	{$group : {_id: "$age"} }
+		{$group : {_id: {age: "$age" , gender: "$gender"} } }
+		
+6) $count Stage:															// Generally Used in the end
+
+syntax->	{$count: "<title>" }
+
+eg ->	{$count : "countries" }
+
+7) $sort Stage:																// Generally Used after $group
+
+syntax->	{$sort: { field1: <-1|1> , field2: <-1|1> ... } }
+
+eg -> 	{$sort: {score: -1} }
+		{$sort: {age: 1 , country: 1}
+		
+8) $project Stage:															// Generally Used after $match and before $group
+
+syntax->	{$project: { <field1> : 1 , <field2> : 2 , <newField1> : <expression> ... } }
+
+eg ->	{$project: {name: 1 , "company.title": 1} }
+		{$project: {_id: 0 , name: 1, age: 1} }
+		{$project: {eyeColor: 0, age: 0} }
+		{$project: {name: 1 , newAge: "$age"} }
+		{$project: {
+					_id: 0,
+					name: 1,
+					info: {
+							eyes: "$eyeColor",
+							fruit: "$favoriteFruit",
+							country: "$company.location.country"
+							}
+		} }
+		
+9) $limit Stage:															// Generally Used after $sort OR before $match
+
+syntax->	{$limit: <number> }
+
+eg ->	{$limit: 1000 }
+		{$limit: 100}
+		
+10) $unwind Stage:									// It will divide one document into several documents based on number of values in that array
+
+syntax->	{$unwind: <arrayReferenceExpression> }
+
+eg ->	{$unwind : "$tags" }
+		{$unwind : "$hobbies" }
+		
+11) $out Stage:																	// Must be used in the end of pipeline
+
+syntax->	{$out: "<outputCollectionName>"}
+eg ->	{$out: "newCollection"}
+		
+12) Accumulators:									// Only Used in $group Stage
+$sum , $avg , $min , $max
+
+syntax->	{ $<accumulator> : <expression> }
+
+eg ->	{$sum : "$quantity" }
+		{$avg : "$age" }
+		{$min : "$spentMoney" }
+		
+13) $sum Accumulator:
+
+syntax->	{$sum : <expression | number > }
+
+eg ->	{count: {$sum : 1} }
+		{total: {$sum : "$quantity"} }
+		{$group: { _id : "$age" , count : {$sum :1} } }
+		
+14) $avg Accumulator:
+
+syntax->	{$avg : <expression> }
+
+eg ->	{newAge : {$avg : "$age"} }
+		{$group : {_id: "$eyeColor" , avgAge : {$avg : "$age"} } }	
+
+15) Unary Operators:								// Generally Used in $project Stage and in $group Stage with Accumulators only
+$lt , $gt , $type , $and , $or , $multiply
+
+16) $type Operator:
+
+syntax->	{$type : <expression> }
+
+eg ->	{$type: "$age"}
+		{$type: "$name"}
+		{$project : {
+						name: 1,
+						ageType: {$type: "$age"},
+						nameType: {$type: "$name"}
+					}}
+
+17) allowDiskUse : true								// When user want to perform Aggregation task on large Collections 
+													   because MongoDB only allows 100mb RAM for Aggregation Stages
+syntax->	db.<collection>.aggregate( [] , {allowDiskUse : true} )
+					
+
+		
+
+
